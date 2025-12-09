@@ -1,12 +1,26 @@
-import Navbar from "../components/Navbar";
+"use client";
+
+import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero/Hero";
+import Services from "./components/Services/Services";
+import { useTheme } from "./context/ThemeContext";
+import About from "./components/About/about";
+import Gallery from "./components/Gallery/gallery";
+import Reviews from "./components/Reviews/ReviewsSection";
+import ContactForm from "./components/Contact/Contact";
 
 export default function Home() {
+  const { theme } = useTheme();
+
   return (
-    <>
+    <main style={{ background: theme.background, color: theme.text }}>
       <Navbar />
-      <section id="home" className="pt-20 min-h-screen bg-[#fffaf6] flex items-center justify-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-[#b85c1b]">Amna’s Mehndi Studio</h1>
-      </section>
-    </>
+      <Hero />
+      <About />
+      <Services />
+      <Gallery theme={theme} limit={8} />
+      <Reviews maxReviews={4} showViewAllButton={true} />
+      <ContactForm />
+    </main>
   );
 }
