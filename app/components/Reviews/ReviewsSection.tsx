@@ -33,7 +33,7 @@ type ReviewsProps = {
     showViewAllButton?: boolean;
 };
 
-export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps) {
+export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsProps) {
     const [user, setUser] = useState<User | null>(null);
     const [reviews, setReviews] = useState<ReviewType[]>([]);
     const [showModal, setShowModal] = useState(false);
@@ -59,7 +59,7 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
     useEffect(() => {
         const fetchReviews = async () => {
             const q = query(
-                collection(db, "reviews"),
+                collection(db, "testimonial "),
                 orderBy("createdAt", "desc"),
                 ...(maxReviews ? [limitQuery(maxReviews)] : [])
             );
@@ -78,20 +78,20 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
     };
 
     const handleSubmit = async () => {
-        if (!user) return toast.error("Login to submit review!");
+        if (!user) return toast.error("Login to submit testimonial !");
         if (!rating) return toast.error("Select rating!");
-        if (!reviewText) return toast.error("Write review text!");
+        if (!reviewText) return toast.error("Write testimonial  text!");
 
         setLoading(true);
         try {
             let photoURL = "";
             if (photo) {
-                const photoRef = ref(storage, `reviews/${Date.now()}_${photo.name}`);
+                const photoRef = ref(storage, `testimonial /${Date.now()}_${photo.name}`);
                 await uploadBytes(photoRef, photo);
                 photoURL = await getDownloadURL(photoRef);
             }
 
-            await addDoc(collection(db, "reviews"), {
+            await addDoc(collection(db, "testimonial "), {
                 name: user.displayName || "Anonymous",
                 email: user.email,
                 rating,
@@ -100,7 +100,7 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
                 createdAt: serverTimestamp(),
             });
 
-            toast.success("Review submitted!");
+            toast.success("Testimonial submitted!");
             setRating(0);
             setReviewText("");
             setPhoto(null);
@@ -108,7 +108,7 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
 
             const snapshot = await getDocs(
                 query(
-                    collection(db, "reviews"),
+                    collection(db, "testimonial "),
                     orderBy("createdAt", "desc"),
                     ...(maxReviews ? [limitQuery(maxReviews)] : [])
                 )
@@ -116,7 +116,7 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
             setReviews(snapshot.docs.map((doc) => ({ id: doc.id, ...(doc.data() as ReviewType) })));
         } catch (err) {
             console.error(err);
-            toast.error("Error submitting review!");
+            toast.error("Error submitting testimonial !");
         }
         setLoading(false);
     };
@@ -131,7 +131,7 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
                 <h2 style={{ color: theme.text }} className="text-3xl font-bold">
                     Our customers love us
                 </h2>
-                <p className="text-gray-600">{reviews.length} Reviews</p>
+                <p className="text-gray-600">{reviews.length} Testimonial </p>
             </div>
 
             <div className="mb-6">
@@ -141,11 +141,11 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
                     className={`px-5 py-2 rounded font-semibold transition 
       ${user ? "bg-[#b85c1b] text-white hover:bg-[#b9723f] cursor-pointer" : "bg-gray-400 text-gray-200 cursor-not-allowed"}`}
                 >
-                    Write a store review
+                    Write a store testimonial 
                 </button>
             </div>
 
-            {!user && <p className="text-gray-600 mt-2">Please login to submit a review.</p>}
+            {!user && <p className="text-gray-600 mt-2">Please login to submit a testimonial .</p>}
 
             <div className="grid md:grid-cols-2 gap-6">
                 {displayedReviews.map((r) => (
@@ -175,7 +175,7 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
                         onClick={() => router.push("/testimonials")}
                         className="px-6 py-2 bg-[#b85c1b] text-white hover:bg-[#b9723f] rounded cursor-pointer transition"
                     >
-                        View All Reviews
+                        View All Testimonial 
                     </button>
                 </div>
             )}
@@ -191,7 +191,7 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
                             <FiX />
                         </button>
 
-                        <h3 className="text-xl font-bold mb-2">Write a store review</h3>
+                        <h3 className="text-xl font-bold mb-2">Write a store testimonial </h3>
                         <p className="text-gray-600 mb-4">Share your feedback with us now</p>
 
                         <div className="flex gap-2 mb-4">
@@ -211,7 +211,7 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
                             value={reviewText}
                             onChange={(e) => setReviewText(e.target.value)}
                             className="w-full border rounded p-2 mb-4 focus:ring-2 focus:ring-blue-400 outline-none"
-                            placeholder="Your review..."
+                            placeholder="Your testimonial ..."
                         />
 
                         <div className="flex items-center gap-2 mb-4">
@@ -244,7 +244,7 @@ export default function Reviews({ maxReviews, showViewAllButton }: ReviewsProps)
                                     : "bg-[#b85c1b] hover:bg-[#b9723f] cursor-pointer"
                                 }`}
                         >
-                            {loading ? "Submitting..." : "Submit review"}
+                            {loading ? "Submitting..." : "Submit testimonial "}
                         </button>
 
                     </div>
