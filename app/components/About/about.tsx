@@ -38,7 +38,7 @@ export default function About() {
           </div>
         </div>
 
-        <div className="lg:w-1/2 w-full rounded-xl overflow-hidden shadow-2xl">
+        <div className="lg:w-1/2 w-full rounded-xl z-0 overflow-hidden shadow-2xl">
           <img
             src="/Slider_Img/bg2.jpg"
             alt="Amna’s Premium Service"

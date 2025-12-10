@@ -69,6 +69,7 @@ export default function Navbar() {
                         ))}
 
                         <button
+                            onClick={() => router.push("/booking")}
                             style={{ background: theme.text, color: theme.background }}
                             className="px-4 py-2 rounded-lg"
                         >
@@ -102,22 +103,34 @@ export default function Navbar() {
                     className="lg:hidden px-4 pb-4 shadow-lg space-y-3 flex flex-col"
                 >
                     {navLinks.map((l) => (
-                        <Link key={l.href} href={l.href}>
+                        <Link
+                            key={l.href}
+                            href={l.href}
+                            onClick={() => setIsOpen(false)}
+                        >
                             {l.name}
                         </Link>
                     ))}
 
                     {user ? (
-                        <button onClick={handleLogout} className="flex items-center gap-2 mt-3 cursor-pointer">
+                        <button
+                            onClick={() => { handleLogout(); setIsOpen(false); }}
+                            className="flex items-center gap-2 mt-3 cursor-pointer"
+                        >
                             <FiLogOut /> Logout
                         </button>
                     ) : (
-                        <Link href="/auth" className="text-xl mt-3 cursor-pointer">
+                        <Link
+                            href="/auth"
+                            className="text-xl mt-3 cursor-pointer"
+                            onClick={() => setIsOpen(false)}
+                        >
                             <FiUser />
                         </Link>
                     )}
                 </div>
             )}
+
         </nav>
     );
 }
