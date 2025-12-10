@@ -138,21 +138,19 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-
 ```
 
 ## Google Auth
 
 ```
 GOOGLE_CLIENT_ID=your_google_client_id
-
 ```
+
 ## Contact Form (Resend)
 
 ```
 RESEND_API_KEY=your_resend_api_key
 NEXT_PUBLIC_EMAIL=your_contact_email
-
 ```
 
 ---
