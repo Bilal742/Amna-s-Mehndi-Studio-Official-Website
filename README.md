@@ -138,35 +138,88 @@ NEXT_PUBLIC_EMAIL=your_email_here
 
 ## 🎬 Live Sections Overview
 
-### 🏠 Home Page
+## 🏠 Home Page
 
-* Banner section
-* Featured gallery
-* Featured reviews
+The Home page is a **comprehensive overview** of the website:
 
-### 🖼️ Gallery Page
+- **Banner Section** – Hero banner highlighting main features.
+- **About Section** – Brief introduction about the business.
+- **Services Section** – Overview of offered services.
+- **Booking Section** – Quick booking form or call-to-action.
+- **Featured Gallery Section** – Showcase of top designs.
+- **Featured Reviews Section** – Highlighted client testimonials.
+- **Contact Section** – Quick contact form.
 
-* Categories
-* Zoom modal
-* Full image slider
+---
 
-### 🌟 Reviews Page
+## 📖 About Page
 
-* Client feedback with ratings
+Detailed information about the business:
 
-### 📞 Contact Page
+- About the brand or company.
+- Team introduction (optional).
+- Mission, vision, and values.
 
-* Name
-* Email
-* Phone
-* Subject
-* Message
+---
 
+## 🛠 Services Page
+
+Comprehensive overview of services offered:
+
+- List of all services with descriptions.
+- Pricing or packages (if applicable).
+- Call-to-action for booking.
+
+---
+
+## 📅 Booking Page
+
+A dedicated booking page with a full form:
+
+- Name
+- Email
+- Phone
+- Service selection
+- Date & time picker
+- Additional notes
+
+---
+
+## 🖼️ Gallery Page
+
+Showcase of Mehndi designs:
+
+- Categories (e.g., Bridal, Arabic, Simple, Foot Mehndi)
+- Zoom modal on image click
+- Full-screen image slider with navigation
+
+---
+
+## 🌟 Reviews Page
+
+All client feedback in one place:
+
+- Ratings (stars or numbers)
+- Client testimonials
+- Optional filtering by service type
+
+---
+
+## 📞 Contact Page
+
+Get in touch via the contact form:
+
+- Name
+- Email
+- Phone
+- Message
+- Optional map for location
+- 
 ---
 
 ## 📸 Screenshots (Optional)
 
-> Add screenshots of your website here for a professional look.
+> Comming soon
 
 ---
 
