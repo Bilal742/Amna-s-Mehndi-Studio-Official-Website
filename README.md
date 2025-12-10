@@ -114,20 +114,40 @@ my-next-app/
 
 ---
 
-## 🛠️ Installation
+## ⚙️ Setup Instructions
 
-```bash
-git clone <repo-url>
-cd my-next-app
-npm install
-npm run dev
-```
+1. **Clone the Repository:**
+   
+   ```bash
+   https://github.com/Bilal742/Amna-s-Mehndi-Studio.git
+  
+3. **Install Dependencies:**
+   
+   ```bash
+   npm install
+   or
+   yarn
+---
+
+3. **Run the Development Server:**
+   
+   ```bash
+   npm run dev
+   or
+   yarn dev
 
 ---
 
-## 📨 Contact Form Setup
+4. **Open in Browser:**
+   
+   ```bash
+   Visit http://localhost:3000
 
-To enable email sending, add the following to `.env.local`:
+--- 
+
+## 🛡️ Environment Variables Setup (Private)
+
+Create a `.env.local` file in the root of your project and add the following **keys only** (values hidden for security):
 
 ## Firebase Config
 
