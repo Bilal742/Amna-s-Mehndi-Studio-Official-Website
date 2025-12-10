@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌸 Amna's Mehndi Studio – Official Website
 
-## Getting Started
+Welcome to **Amna's Mehndi Studio** – a professional mehndi (henna) services website built with **Next.js**, offering a modern UI, smooth animations, and an elegant user experience.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+
+* 🎨 **Beautiful Mehndi Gallery** with categories (Bridal, Arabic, Simple, Foot Mehndi, and more)
+* 📱 **Fully Responsive Design** – Perfect on mobile, tablet, and desktop
+* 🌙 **Light & Dark Theme Support**
+* 📩 **Contact Form** with validation and smooth toast notifications
+* ⭐ **Reviews Section** with View All option
+* 🖼️ Image hover zoom & modal slider functionality
+* ⚡ Fast, SEO-friendly & optimized with Next.js 15 App Router
+
+---
+
+## 📁 Project Structure
+
+```
+my-next-app/
+│
+├── app/
+│   ├── components/
+│   ├── gallery/
+│   ├── reviews/
+│   ├── contact/
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── public/
+│   └── Gallery_Img/
+│
+├── styles/
+│
+├── README.md
+└── package.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Next.js 15** (App Router)
+* **React**
+* **Tailwind CSS**
+* **Lucide Icons**
+* **React Hook Form + Zod**
+* **Resend Email API** (For contact form)
 
-## Learn More
- 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+git clone <repo-url>
+cd my-next-app
+npm install
+npm run dev
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📨 Contact Form Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To enable email sending, add the following to `.env.local`:
+
+```
+RESEND_API_KEY=your_api_key_here
+NEXT_PUBLIC_EMAIL=your_email_here
+```
+
+---
+
+## 🎬 Live Sections Overview
+
+### 🏠 Home Page
+
+* Banner section
+* Featured gallery
+* Featured reviews
+
+### 🖼️ Gallery Page
+
+* Categories
+* Zoom modal
+* Full image slider
+
+### 🌟 Reviews Page
+
+* Client feedback with ratings
+
+### 📞 Contact Page
+
+* Name
+* Email
+* Phone
+* Subject
+* Message
+
+---
+
+## 📸 Screenshots (Optional)
+
+> Add screenshots of your website here for a professional look.
+
+---
+
+## ❤️ Credits
+
+Designed & Developed by **Bilal** for **Amna's Mehndi Studio**.
+
+---
+
+## 📜 License
+
+This project is for personal & portfolio use only. Not allowed for commercial distribution without permission.
+
+---
+
+✨ *Thank you for visiting Amna's Mehndi Studio Website Repository!*
