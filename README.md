@@ -33,22 +33,72 @@ Welcome to **Amna's Mehndi Studio** – a professional mehndi (henna) services w
 
 ```
 my-next-app/
-│
-├── app/
-│   ├── components/
-│   ├── gallery/
-│   ├── reviews/
-│   ├── contact/
-│   ├── layout.tsx
-│   └── page.tsx
-│
-├── public/
-│   └── Gallery_Img/
-│
-├── styles/
-│
-├── README.md
-└── package.json
+├─ .next/
+├─ app/
+│ ├─ about/
+│ │ └─ page.tsx
+│ ├─ api/
+│ │ ├─ booking/
+│ │ │ └─ route.ts
+│ │ ├─ contact/
+│ │ │ └─ route.ts
+│ │ ├─ count/
+│ │ │ └─ route.ts
+│ │ └─ reviews/
+│ │ └─ route.ts
+│ ├─ auth/
+│ │ └─ page.tsx
+│ ├─ booking/
+│ │ └─ page.tsx
+│ ├─ components/
+│ │ ├─ About/
+│ │ │ └─ about.tsx
+│ │ ├─ Contact/
+│ │ │ └─ Contact.tsx
+│ │ ├─ Footer/
+│ │ │ └─ footer.tsx
+│ │ ├─ Gallery/
+│ │ │ └─ gallery.tsx
+│ │ ├─ Hero/
+│ │ │ └─ Hero.tsx
+│ │ ├─ Navbar/
+│ │ │ └─ Navbar.tsx
+│ │ ├─ Reviews/
+│ │ │ └─ ReviewSection.tsx
+│ │ ├─ Services/
+│ │ │ └─ Services.tsx
+│ │ ├─ Testimonials/
+│ │ │ ├─ Testimonial.tsx
+│ │ │ ├─ themeColors.js
+│ │ │ └─ themeTypes.ts
+│ │ └─ contact/
+│ │ └─ context/
+│ │ └─ ThemeContext.tsx
+│ ├─ firebase/
+│ │ ├─ gallery/
+│ │ │ └─ page.tsx
+│ │ ├─ services/
+│ │ │ └─ page.tsx
+│ │ └─ testimonials/
+│ │ └─ page.tsx
+│ ├─ twi.css
+│ ├─ globals.css
+│ ├─ layout.tsx
+│ ├─ page.tsx
+│ └─ data/
+│ ├─ reviews.json
+│ └─ mehandiDaily_data
+├─ node_modules/
+├─ public/
+├─ .env
+├─ .gitignore
+├─ eslint.config.js
+├─ next.config.js
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.js
+├─ README.md
+└─ tsconfig.json
 ```
 
 ---
