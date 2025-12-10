@@ -124,7 +124,7 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
     const displayedReviews = maxReviews ? reviews.slice(0, maxReviews) : reviews;
 
     return (
-        <section className="max-w-6xl mx-auto pt-40 px-4">
+        <section className="max-w-6xl mx-auto py-30 px-4">
             <Toaster position="top-right" />
 
             <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">

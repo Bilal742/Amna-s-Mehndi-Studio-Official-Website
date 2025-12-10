@@ -7,6 +7,7 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { FiLogOut, FiMenu, FiUser, FiX, FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "@/app/context/ThemeContext";
+import toast from "react-hot-toast";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function Navbar() {
         { name: "Gallery", href: "/gallery" },
         { name: "Booking", href: "/booking" },
         { name: "Testimonials", href: "/testimonials" },
-        { name: "Contact", href: "#contact" },
+        { name: "Contact", href: "/contact" },
     ];
 
     useEffect(() => {
@@ -31,11 +32,18 @@ export default function Navbar() {
     }, []);
 
     const handleLogout = async () => {
-        await signOut(auth);
-        alert("Logged out successfully!");
-        router.push("/");
-    };
+        const isConfirmed = window.confirm("Are you sure you want to logout?");
+        if (!isConfirmed) return;
 
+        try {
+            await signOut(auth);
+            toast.success("Logged out successfully!");
+            router.push("/");
+        } catch (err) {
+            console.error(err);
+            toast.error("Error logging out!");
+        }
+    };
     return (
         <nav
             style={{ background: theme.background, color: theme.text }}
@@ -44,7 +52,9 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:p-3">
                 <div className="flex justify-between h-16 items-center">
 
-                    <div className="text-2xl font-bold">Amna’s</div>
+                    <div
+                        onClick={() => router.push("/")}
+                        className="cursor-pointer text-2xl font-bold">Amna’s</div>
 
                     <div className="hidden lg:flex space-x-6 items-center">
                         {navLinks.map((link) => (
@@ -70,11 +80,11 @@ export default function Navbar() {
                         </button> */}
 
                         {user ? (
-                            <button onClick={handleLogout} className="flex items-center gap-2">
+                            <button onClick={handleLogout} className="flex items-center gap-2 cursor-pointer">
                                 <FiLogOut /> Logout
                             </button>
                         ) : (
-                            <Link href="/auth" className="text-xl">
+                            <Link href="/auth" className="text-xl cursor-pointer">
                                 <FiUser />
                             </Link>
                         )}
@@ -98,11 +108,11 @@ export default function Navbar() {
                     ))}
 
                     {user ? (
-                        <button onClick={handleLogout} className="flex items-center gap-2 mt-3">
+                        <button onClick={handleLogout} className="flex items-center gap-2 mt-3 cursor-pointer">
                             <FiLogOut /> Logout
                         </button>
                     ) : (
-                        <Link href="/auth" className="text-xl mt-3">
+                        <Link href="/auth" className="text-xl mt-3 cursor-pointer">
                             <FiUser />
                         </Link>
                     )}

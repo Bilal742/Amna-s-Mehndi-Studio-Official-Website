@@ -49,7 +49,7 @@ export default function Gallery({ theme, limit }: GalleryProps) {
     return (
         <section
             id="gallery"
-            className="pt-40 px-6 md:px-20 transition-colors duration-500"
+            className="py-30 px-6 md:px-20 transition-colors duration-500"
             style={{ background: theme.background, color: theme.text }}
         >
             <h2 className="text-4xl font-bold text-center mb-12" style={{ color: theme.text }}>

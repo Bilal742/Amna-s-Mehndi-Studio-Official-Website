@@ -108,13 +108,13 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="relative overflow-hidden mt-30">
+    <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-gradient-to-br from-orange-500/20 to-pink-500/20 blur-3xl" />
         <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 blur-3xl" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -244,7 +244,7 @@ export default function ContactSection() {
                     value={form.name}
                     onChange={handleChange}
                     error={errors.name}
-                    placeholder="Bilal Ahmed"
+                    placeholder="Enter your name"
                   />
                   <Field
                     label="Email"
@@ -253,7 +253,7 @@ export default function ContactSection() {
                     value={form.email}
                     onChange={handleChange}
                     error={errors.email}
-                    placeholder="you@example.com"
+                    placeholder="You@example.com"
                   />
                 </div>
 

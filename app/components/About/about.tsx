@@ -7,7 +7,7 @@ export default function About() {
   return (
     <section
       style={{ background: theme.background, color: theme.text }}
-      className="pt-40 px-6 md:px-12"
+      className="py-30 px-6 md:px-12"
     >
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
         

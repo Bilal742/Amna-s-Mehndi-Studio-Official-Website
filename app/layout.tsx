@@ -6,6 +6,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { motion } from "framer-motion";
 import { SessionProvider } from "next-auth/react";
 import Footer from "./components/Footer/footer";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               animate={{ y: [0, -50, 0], x: [0, -20, 0] }} 
               transition={{ duration: 6, repeat: Infinity, repeatType: "loop" }}
             />
+            <Toaster position="top-center" />
             {children}
             <Footer />
           </ThemeProvider>

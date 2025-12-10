@@ -27,7 +27,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="pt-40 px-6 md:px-20"
+      className="py-30 px-6 md:px-20"
       style={{ background: theme.background, color: theme.text }}
     >
       <h2

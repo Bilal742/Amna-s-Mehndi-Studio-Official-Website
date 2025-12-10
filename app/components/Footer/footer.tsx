@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer
       style={{ background: theme.background, color: theme.text }}
-      className="pt-40 pb-12 px-6 md:px-20 transition-colors duration-500"
+      className="pt-30 pb-12 px-6 md:px-20 transition-colors duration-500"
     >
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
         <div>
