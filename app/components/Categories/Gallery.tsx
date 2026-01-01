@@ -102,19 +102,19 @@ export default function CategoriesGallery({ slug }: { slug: string }) {
       </p>
     );
   }
+const allMedia: MediaItem[] = [
+  ...activeCategory.images.map((img, i) => ({
+    type: "image" as const, 
+    src: img,
+    index: i,
+  })),
+  ...activeCategory.videos.map((vid, i) => ({
+    type: "video" as const, 
+    src: vid,
+    index: i + activeCategory.images.length,
+  })),
+];
 
-  const allMedia: MediaItem[] = [
-    ...activeCategory.images.map((img, i) => ({
-      type: "image",
-      src: img,
-      index: i,
-    })),
-    ...activeCategory.videos.map((vid, i) => ({
-      type: "video",
-      src: vid,
-      index: i + activeCategory.images.length,
-    })),
-  ];
 
   const next = () =>
     setActiveMedia((prev) =>
