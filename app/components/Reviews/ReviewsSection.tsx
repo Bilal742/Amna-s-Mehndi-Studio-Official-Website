@@ -33,7 +33,7 @@ type ReviewsProps = {
     showViewAllButton?: boolean;
 };
 
-export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsProps) {
+export default function ReviewsSection({ maxReviews = 4, showViewAllButton = true }: ReviewsProps) {
     const [user, setUser] = useState<User | null>(null);
     const [reviews, setReviews] = useState<ReviewType[]>([]);
     const [showModal, setShowModal] = useState(false);
@@ -41,8 +41,26 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
     const [reviewText, setReviewText] = useState("");
     const [photo, setPhoto] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
+    const [expanded, setExpanded] = useState<Record<string, boolean>>({});
     const { theme } = useTheme();
     const router = useRouter();
+
+    const avgRating = reviews.length ? +(reviews.reduce((s, r) => s + (r.rating || 0), 0) / reviews.length).toFixed(1) : 0;
+
+    const formatTime = (createdAt: any) => {
+        const date = createdAt?.toDate ? createdAt.toDate() : createdAt ? new Date(createdAt) : null;
+        if (!date) return "Just now";
+        const diff = Math.floor((Date.now() - date.getTime()) / 1000);
+        if (diff < 60) return `${diff}s ago`;
+        if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+        if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+        return new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" }).format(date);
+    };
+
+    const toggleExpand = (id?: string) => {
+        if (!id) return;
+        setExpanded((s) => ({ ...s, [id]: !s[id] }));
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -59,7 +77,7 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
     useEffect(() => {
         const fetchReviews = async () => {
             const q = query(
-                collection(db, "testimonial "),
+                collection(db, "testimonials"),
                 orderBy("createdAt", "desc"),
                 ...(maxReviews ? [limitQuery(maxReviews)] : [])
             );
@@ -78,20 +96,20 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
     };
 
     const handleSubmit = async () => {
-        if (!user) return toast.error("Login to submit testimonial !");
-        if (!rating) return toast.error("Select rating!");
-        if (!reviewText) return toast.error("Write testimonial  text!");
+        if (!user) return toast.error("Please log in to submit a review.");
+        if (!rating) return toast.error("Please select a rating.");
+        if (!reviewText.trim()) return toast.error("Please write your review.");
 
         setLoading(true);
         try {
             let photoURL = "";
             if (photo) {
-                const photoRef = ref(storage, `testimonial /${Date.now()}_${photo.name}`);
+                const photoRef = ref(storage, `testimonials/${Date.now()}_${photo.name}`);
                 await uploadBytes(photoRef, photo);
                 photoURL = await getDownloadURL(photoRef);
             }
 
-            await addDoc(collection(db, "testimonial "), {
+            await addDoc(collection(db, "testimonials"), {
                 name: user.displayName || "Anonymous",
                 email: user.email,
                 rating,
@@ -100,7 +118,7 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
                 createdAt: serverTimestamp(),
             });
 
-            toast.success("Testimonial submitted!");
+            toast.success("Review submitted — thank you!");
             setRating(0);
             setReviewText("");
             setPhoto(null);
@@ -108,7 +126,7 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
 
             const snapshot = await getDocs(
                 query(
-                    collection(db, "testimonial "),
+                    collection(db, "testimonials"),
                     orderBy("createdAt", "desc"),
                     ...(maxReviews ? [limitQuery(maxReviews)] : [])
                 )
@@ -116,7 +134,7 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
             setReviews(snapshot.docs.map((doc) => ({ id: doc.id, ...(doc.data() as ReviewType) })));
         } catch (err) {
             console.error(err);
-            toast.error("Error submitting testimonial !");
+            toast.error("There was an error submitting your review. Please try again.");
         }
         setLoading(false);
     };
@@ -124,58 +142,86 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
     const displayedReviews = maxReviews ? reviews.slice(0, maxReviews) : reviews;
 
     return (
-        <section className="max-w-6xl mx-auto py-30 px-4">
+        <section className="max-w-6xl mx-auto py-12 px-4" aria-labelledby="reviews-heading" aria-label="Customer reviews">
             <Toaster position="top-right" />
 
-            <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-                <h2 style={{ color: theme.text }} className="text-3xl font-bold">
-                    Our customers love us
+            <div className="flex flex-col items-center mb-10 gap-4">
+                <h2 id="reviews-heading" className="text-3xl md:text-4xl font-bold text-center" style={{ color: '#cc2b63' }}>
+                    What People Say...
                 </h2>
-                <p className="text-gray-600">{reviews.length} Testimonial </p>
-            </div>
+                <p className="text-gray-500 mt-2">{reviews.length} reviews • <span className="font-semibold">{avgRating} / 5</span></p>
 
-            <div className="mb-6">
-                <button
-                    onClick={() => setShowModal(true)}
-                    disabled={!user}
-                    className={`px-5 py-2 rounded font-semibold transition 
-      ${user ? "bg-[#b85c1b] text-white hover:bg-[#b9723f] cursor-pointer" : "bg-gray-400 text-gray-200 cursor-not-allowed"}`}
-                >
-                    Write a store testimonial 
-                </button>
-            </div>
-
-            {!user && <p className="text-gray-600 mt-2">Please login to submit a testimonial .</p>}
-
-            <div className="grid md:grid-cols-2 gap-6">
-                {displayedReviews.map((r) => (
-                    <div
-                        key={r.id}
-                        className="p-6 border rounded-xl shadow-lg flex gap-4 items-start bg-white hover:shadow-2xl transition"
+                <div className="flex items-center gap-3 mt-2">
+                    <button
+                        onClick={() => setShowModal(true)}
+                        disabled={!user}
+                        className={`px-5 py-2 rounded font-semibold transition shadow-sm flex items-center gap-2
+              ${user ? "bg-[#b85c1b] text-white hover:bg-[#b9723f]" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}
                     >
-                        {r.photo && (
-                            <img src={r.photo} alt="Photo" className="w-16 h-16 rounded-full object-cover border" />
-                        )}
-                        <div>
-                            <div className="flex gap-1 mb-2">
-                                {Array.from({ length: r.rating }).map((_, i) => (
-                                    <FiStar key={i} className="text-yellow-400" />
-                                ))}
-                            </div>
-                            <p className="font-semibold text-lg">{r.name}</p>
-                            <p className="text-gray-700 mt-1">{r.review}</p>
-                        </div>
-                    </div>
-                ))}
+                        Write a review
+                    </button>
+                    {showViewAllButton && (
+                        <button onClick={() => router.push("/testimonials")} className="px-4 py-2 text-sm text-gray-700 hover:underline">
+                            View all
+                        </button>
+                    )}
+                </div>
             </div>
 
-            {showViewAllButton && maxReviews && (
+            {!user && <p className="text-gray-600 mt-2">Please log in to submit a review.</p>}
+
+            {displayedReviews.length === 0 ? (
+                <div className="flex flex-col items-center gap-4 py-8">
+                    <p className="text-gray-600">No reviews yet — be the first to share your experience.</p>
+                    <button onClick={() => setShowModal(true)} disabled={!user} className={`px-5 py-2 rounded font-semibold ${user ? 'bg-[#b85c1b] text-white' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>Write a review</button>
+                </div>
+            ) : (
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+                    {displayedReviews.map((r) => (
+                        <article key={r.id} tabIndex={0} className="p-8 border border-gray-300 rounded-2xl bg-white hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-[#b85c1b] flex flex-col items-center text-center h-full" aria-labelledby={`review-${r.id}-title`}>
+                                    <div className="flex gap-1 mt-2 mb-4">
+                                        {Array.from({ length: r.rating || 0 }).map((_, i) => (
+                                            <FiStar key={i} className="text-yellow-400 text-xl" />
+                                        ))}
+                                    </div>
+
+                                    <p className="text-gray-500 text-sm mb-6 max-w-[28rem]">
+                                        {(r.review && r.review.length > 220 && !expanded[r.id ?? ""]) ? (
+                                            <>
+                                                {r.review.slice(0, 220)}
+                                                <button aria-expanded={!!expanded[r.id ?? ""]} aria-controls={`review-${r.id}-body`} onClick={() => toggleExpand(r.id)} className="ml-2 text-[#b85c1b] font-medium">Read more</button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span id={`review-${r.id}-body`}>{r.review}</span>
+                                                {r.review && r.review.length > 220 && <button aria-expanded={!!expanded[r.id ?? ""]} aria-controls={`review-${r.id}-body`} onClick={() => toggleExpand(r.id)} className="ml-2 text-[#b85c1b] font-medium">Show less</button>}
+                                            </>
+                                        )}
+                                    </p>
+
+                                    <div className="flex flex-col items-center">
+                                        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 mb-2">
+                                            {r.photo ? (
+                                                <img src={r.photo} alt={`${r.name} photo`} className="w-full h-full object-cover" />
+                                            ) : (
+                                                <div className="w-full h-full flex items-center justify-center text-gray-700 font-semibold">{(r.name || "").split(" ")[0]?.charAt(0) || "U"}</div>
+                                            )}
+                                        </div>
+                                        <p className="font-semibold text-gray-800">{r.name}</p>
+                                    </div>
+                        </article>
+                    ))}
+                </div>
+            )}
+
+            {showViewAllButton && reviews.length >= maxReviews && (
                 <div className="mt-6 text-center">
                     <button
-                        onClick={() => router.push("/testimonials")}
+                        onClick={() => router.push("/testimonials#reviews")}
+                        aria-label="View all reviews"
                         className="px-6 py-2 bg-[#b85c1b] text-white hover:bg-[#b9723f] rounded cursor-pointer transition"
                     >
-                        View All Testimonial 
+                        View all reviews
                     </button>
                 </div>
             )}
@@ -191,8 +237,8 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
                             <FiX />
                         </button>
 
-                        <h3 className="text-xl font-bold mb-2">Write a store testimonial </h3>
-                        <p className="text-gray-600 mb-4">Share your feedback with us now</p>
+                        <h3 className="text-xl font-bold mb-2">Share your experience</h3>
+                        <p className="text-gray-600 mb-4">Help others by giving honest feedback.</p>
 
                         <div className="flex gap-2 mb-4">
                             {Array.from({ length: 5 }).map((_, i) => (
@@ -211,7 +257,7 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
                             value={reviewText}
                             onChange={(e) => setReviewText(e.target.value)}
                             className="w-full border rounded p-2 mb-4 focus:ring-2 focus:ring-blue-400 outline-none"
-                            placeholder="Your testimonial ..."
+                            placeholder="Tell us what you liked and what could be improved..."
                         />
 
                         <div className="flex items-center gap-2 mb-4">
@@ -244,7 +290,7 @@ export default function Testimonial({ maxReviews, showViewAllButton }: ReviewsPr
                                     : "bg-[#b85c1b] hover:bg-[#b9723f] cursor-pointer"
                                 }`}
                         >
-                            {loading ? "Submitting..." : "Submit testimonial "}
+                            {loading ? "Submitting..." : "Submit review"}
                         </button>
 
                     </div>

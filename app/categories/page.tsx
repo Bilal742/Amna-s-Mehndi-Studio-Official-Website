@@ -1,31 +1,35 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const categories = [
-  { name: "Basic Mehndi", slug: "basic-mehndi" },
-  { name: "Trending Designs", slug: "trending-designs" },
-  { name: "Aesthetic Designs", slug: "aesthetic-designs" },
-  { name: "Feet Designs", slug: "feet-designs" },
-  { name: "Backhand Designs", slug: "backhand-designs" },
-  { name: "Arabic Designs", slug: "arabic-designs" },
+  { name: "Trending designs", slug: "trending-designs", img: "/Gallery_Img/bg10.jpg" },
+  { name: "Indian designs", slug: "indian-designs", img: "/Gallery_Img/bg11.jpg" },
+  { name: "Simple designs", slug: "simple-designs", img: "/Gallery_Img/bg12.jpg" },
+  { name: "Arabic designs", slug: "arabic-designs", img: "/Gallery_Img/bg13.jpg" },
+  { name: "Pakistani Mehndi", slug: "pakistani-mehndi", img: "/Gallery_Img/bg14.jpg" },
+  { name: "Aesthetic designs", slug: "aesthetic-designs", img: "/Gallery_Img/bg15.jpg" },
+  { name: "Feet designs", slug: "feet-designs", img: "/Gallery_Img/bg16.jpg" },
+  { name: "Backhand designs", slug: "backhand-designs", img: "/Gallery_Img/bg17.jpg" },
 ];
 
 export default function CategoriesPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-12">
-        Mehndi Categories
-      </h1>
+    <div className="max-w-7xl mx-auto px-4 py-28">
+      <div className="bg-pink-100 py-4 rounded-md mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center text-pink-700">Categories</h1>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
         {categories.map((cat) => (
-          <Link
-            key={cat.slug}
-            href={`/project/${cat.slug}`}
-            className="h-48 flex items-center justify-center rounded-xl
-            bg-pink-100 hover:bg-pink-300 transition
-            text-xl font-semibold shadow-lg hover:scale-105"
-          >
-            {cat.name}
+          <Link key={cat.slug} href={`/project/${cat.slug}`} className="group">
+            <div className="bg-pink-50 rounded-md p-6 flex flex-col items-center hover:shadow-lg transition transform hover:-translate-y-1">
+              <div className="w-40 h-40 rounded-full bg-pink-100 overflow-hidden flex items-center justify-center">
+                <Image src={cat.img} alt={cat.name} width={220} height={220} className="object-cover w-full h-full" />
+              </div>
+              <div className="mt-4 text-center">
+                <h3 className="text-lg font-semibold text-gray-800 group-hover:text-pink-700">{cat.name}</h3>
+              </div>
+            </div>
           </Link>
         ))}
       </div>
