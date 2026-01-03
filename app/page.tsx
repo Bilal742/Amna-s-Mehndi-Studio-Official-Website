@@ -23,7 +23,7 @@ export default function Home() {
       <Services />
       <Categories />
       <Gallery theme={theme} limit={8} />
-      <Reviews maxReviews={4} showViewAllButton={true} />
+      <Reviews maxReviews={3} showViewAllButton={true} />
       <ContactForm />
     </main>
   );

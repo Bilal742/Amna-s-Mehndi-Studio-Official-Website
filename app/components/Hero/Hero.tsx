@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "@/app/context/ThemeContext";
 
 const images = [
-  "/Slider_Img/bg.jpg",
-  "/Slider_Img/bg1.jpg",
-  "/Slider_Img/bg2.jpg",
+  "/Slider_Img/bg6.jpg",
+  "/Slider_Img/bg4.jpg",
+  "/Slider_Img/bg5.jpg",
 ];
 
 const Hero = () => {

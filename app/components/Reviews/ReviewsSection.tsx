@@ -214,17 +214,17 @@ export default function ReviewsSection({ maxReviews = 4, showViewAllButton = tru
                 </div>
             )}
 
-            {showViewAllButton && reviews.length >= maxReviews && (
+            {/* {showViewAllButton && reviews.length >= maxReviews && (
                 <div className="mt-6 text-center">
                     <button
-                        onClick={() => router.push("/testimonials#reviews")}
+                        onClick={() => router.push("/testimonials")}
                         aria-label="View all reviews"
                         className="px-6 py-2 bg-[#b85c1b] text-white hover:bg-[#b9723f] rounded cursor-pointer transition"
                     >
                         View all reviews
                     </button>
                 </div>
-            )}
+            )} */}
 
 
             {showModal && user && (
