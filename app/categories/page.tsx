@@ -15,19 +15,19 @@ const categories = [
 export default function CategoriesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-28">
-      <div className="bg-pink-100 py-4 rounded-md mb-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center text-pink-700">Categories</h1>
+      <div className=" py-4 rounded-md mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-center text-[#B85C1B]">Categories</h1>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
         {categories.map((cat) => (
           <Link key={cat.slug} href={`/project/${cat.slug}`} className="group">
-            <div className="bg-pink-50 rounded-md p-6 flex flex-col items-center hover:shadow-lg transition transform hover:-translate-y-1">
+            <div className="border-2 border-[#B85C1B] rounded-md p-6 flex flex-col items-center hover:shadow-lg transition transform hover:-translate-y-1">
               <div className="w-40 h-40 rounded-full bg-pink-100 overflow-hidden flex items-center justify-center">
                 <Image src={cat.img} alt={cat.name} width={220} height={220} className="object-cover w-full h-full" />
               </div>
               <div className="mt-4 text-center">
-                <h3 className="text-lg font-semibold text-gray-800 group-hover:text-pink-700">{cat.name}</h3>
+                <h3 className="text-lg font-semibold text-[#B85C1B]">{cat.name}</h3>
               </div>
             </div>
           </Link>

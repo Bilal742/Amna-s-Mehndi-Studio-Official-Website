@@ -142,11 +142,11 @@ export default function ReviewsSection({ maxReviews = 4, showViewAllButton = tru
     const displayedReviews = maxReviews ? reviews.slice(0, maxReviews) : reviews;
 
     return (
-        <section className="max-w-6xl mx-auto py-12 px-4" aria-labelledby="reviews-heading" aria-label="Customer reviews">
+        <section className="max-w-6xl mx-auto py-28 px-4" aria-labelledby="reviews-heading" aria-label="Customer reviews">
             <Toaster position="top-right" />
 
             <div className="flex flex-col items-center mb-10 gap-4">
-                <h2 id="reviews-heading" className="text-3xl md:text-4xl font-bold text-center" style={{ color: '#cc2b63' }}>
+                <h2 id="reviews-heading" className="text-3xl md:text-4xl font-bold text-center" style={{ color: '#B85C1B' }}>
                     What People Say...
                 </h2>
                 <p className="text-gray-500 mt-2">{reviews.length} reviews • <span className="font-semibold">{avgRating} / 5</span></p>
@@ -199,7 +199,7 @@ export default function ReviewsSection({ maxReviews = 4, showViewAllButton = tru
                                         )}
                                     </p>
 
-                                    <div className="flex flex-col items-center">
+                                    <div className="flex items-center gap-3">
                                         <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 mb-2">
                                             {r.photo ? (
                                                 <img src={r.photo} alt={`${r.name} photo`} className="w-full h-full object-cover" />

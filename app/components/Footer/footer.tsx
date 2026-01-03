@@ -24,16 +24,16 @@ export default function Footer() {
           <h3 className="text-xl font-bold mb-4">Quick Links</h3>
           <ul className="space-y-2">
             <li>
-              <a href="#services" className="hover:text-[#b85c1b] transition-colors">Services</a>
+              <a href="/services" className="hover:text-[#b85c1b] transition-colors">Services</a>
             </li>
             <li>
-              <a href="#gallery" className="hover:text-[#b85c1b] transition-colors">Gallery</a>
+              <a href="/gallery" className="hover:text-[#b85c1b] transition-colors">Gallery</a>
             </li>
             <li>
-              <a href="#booking" className="hover:text-[#b85c1b] transition-colors">Booking</a>
+              <a href="/booking" className="hover:text-[#b85c1b] transition-colors">Booking</a>
             </li>
             <li>
-              <a href="#contact" className="hover:text-[#b85c1b] transition-colors">Contact</a>
+              <a href="/contact" className="hover:text-[#b85c1b] transition-colors">Contact</a>
             </li>
           </ul>
         </div>
@@ -45,7 +45,7 @@ export default function Footer() {
               <FiPhone /> <span>+92 300 1234567</span>
             </li>
             <li className="flex items-center gap-2">
-              <FiMail /> <span>info@amnasmehndi.com</span>
+              <FiMail /> <span>usmanali.office.pk@gmail.com</span>
             </li>
             <li className="flex items-center gap-3 mt-2">
               <a href="#" className="hover:text-[#b85c1b] transition-colors"><FiFacebook size={20} /></a>

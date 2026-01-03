@@ -114,19 +114,19 @@ export default function ContactSection() {
         <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 blur-3xl" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="mx-auto mb-10 max-w-2xl text-center"
         >
-          <span
+          {/* <span
             style={{ background: theme.text, color: theme.background }}
             className="inline-block rounded-full px-3 py-1 text-xs font-semibold tracking-wide shadow-md">
             Get in touch
-          </span>
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          </span> */}
+          <h2 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl text-[#B85C1B]">
             Contact{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-600">
               Us
@@ -170,7 +170,7 @@ export default function ContactSection() {
               title="Email"
               content={
                 <a className="hover:underline" href="mailto:bilalusman1291@gmail.com">
-                  bilalusman1291@gmail.com
+                  usmanali.office.pk@gmail.com
                 </a>
               }
             />
